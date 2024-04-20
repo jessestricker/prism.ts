@@ -13,6 +13,16 @@ export class Srgb extends Nominal<typeof Srgb.SYMBOL> {
   ) {
     super();
   }
+
+  toSrgbLinear(): SrgbLinear {
+    function toLinear(value: number): number {
+      return value <= 0.04045
+        ? value / 12.92
+        : ((value + 0.055) / 1.055) ** 2.4;
+    }
+
+    return new SrgbLinear(toLinear(this.r), toLinear(this.g), toLinear(this.b));
+  }
 }
 
 /**
@@ -27,5 +37,19 @@ export class SrgbLinear extends Nominal<typeof SrgbLinear.SYMBOL> {
     readonly b: number,
   ) {
     super();
+  }
+
+  toSrgb(): Srgb {
+    function toNonLinear(value: number): number {
+      return value <= 0.0031308
+        ? 12.92 * value
+        : 1.055 * value ** (1.0 / 2.4) - 0.055;
+    }
+
+    return new Srgb(
+      toNonLinear(this.r),
+      toNonLinear(this.g),
+      toNonLinear(this.b),
+    );
   }
 }
