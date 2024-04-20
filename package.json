@@ -3,12 +3,17 @@
   "version": "0.0.0",
   "author": "Jesse Stricker",
   "license": "Apache-2.0",
+  "type": "module",
   "scripts": {
     "build": "tsc --build",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint"
   },
   "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "eslint": "^9.1.0",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.0"
   }
 }
