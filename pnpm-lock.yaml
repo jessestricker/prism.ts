@@ -8,12 +8,6 @@ importers:
 
   .:
     devDependencies:
-      '@tsconfig/node-lts':
-        specifier: ^20.1.3
-        version: 20.1.3
-      '@tsconfig/strictest':
-        specifier: ^2.0.5
-        version: 2.0.5
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -22,12 +16,6 @@ importers:
         version: 5.4.5
 
 packages:
-
-  '@tsconfig/node-lts@20.1.3':
-    resolution: {integrity: sha512-m3b7EP2U+h5tNSpaBMfcTuHmHn04wrgRPQQrfKt75YIPq6kPs2153/KfPHdqkEWGx5pEBvS6rnvToT+yTtC1iw==}
-
-  '@tsconfig/strictest@2.0.5':
-    resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
 
   prettier@3.2.5:
     resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
@@ -40,10 +28,6 @@ packages:
     hasBin: true
 
 snapshots:
-
-  '@tsconfig/node-lts@20.1.3': {}
-
-  '@tsconfig/strictest@2.0.5': {}
 
   prettier@3.2.5: {}
 
