@@ -12,6 +12,8 @@ jobs:
     permissions:
       contents: write # to create a GitHub release
       packages: write # to publish to the GitHub Package Registry
+      issues: write # to comment on released issues
+      pull-requests: write # to comment on released pull requests
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
