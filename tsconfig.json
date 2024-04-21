@@ -9,7 +9,7 @@
     "noUncheckedIndexedAccess": true,
 
     "declaration": true,
-    "outDir": "dist"
+    "outDir": "lib"
   },
   "include": ["src"]
 }
