@@ -1,8 +1,20 @@
 {
-  "name": "prism",
+  "name": "@jessestricker/prism",
   "version": "0.0.0",
   "author": "Jesse Stricker",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jessestricker/prism.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
   "scripts": {
     "build": "tsc --build",
     "format": "prettier --write .",
@@ -16,6 +28,7 @@
     "@eslint/js": "^8.57.0",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
+    "semantic-release": "^23.0.8",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.7.0"
   }
