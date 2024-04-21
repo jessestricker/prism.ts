@@ -10,10 +10,16 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --build",
     "format": "prettier --write .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepare": "pnpm run build"
   },
   "packageManager": "pnpm@9.0.4",
   "engines": {

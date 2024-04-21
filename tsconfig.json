@@ -8,6 +8,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
 
+    "declaration": true,
     "outDir": "dist"
   },
   "include": ["src"]
