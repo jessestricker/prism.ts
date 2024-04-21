@@ -9,6 +9,10 @@
     "format": "prettier --write .",
     "lint": "eslint"
   },
+  "packageManager": "pnpm@9.0.4",
+  "engines": {
+    "node": "20"
+  },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
     "eslint": "^8.57.0",
