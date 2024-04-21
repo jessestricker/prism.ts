@@ -15,6 +15,7 @@
   "files": [
     "lib"
   ],
+  "type": "module",
   "scripts": {
     "build": "tsc --build",
     "format": "prettier --write .",
