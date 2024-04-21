@@ -29,5 +29,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --dev
 
-      - name: Check format
+      - name: Release
         run: pnpm semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
