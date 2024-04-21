@@ -1,5 +1,4 @@
 {
-  "include": ["src"],
   "compilerOptions": {
     "strict": true,
     "exactOptionalPropertyTypes": true,
@@ -9,7 +8,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
 
-    "rootDir": "src",
     "outDir": "dist"
-  }
+  },
+  "include": ["src"]
 }
