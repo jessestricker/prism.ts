@@ -1,7 +1,6 @@
 name: Build
 on:
   push:
-  workflow_call:
 jobs:
   build:
     name: Build
@@ -68,3 +67,9 @@ jobs:
 
       - name: Check lint
         run: pnpm lint
+
+  release:
+    name: Release
+    needs: [build, check-format, check-lint]
+    uses: ./.github/workflows/release.yml
+    if: github.ref_type == 'branch' && github.ref_name == 'main'
