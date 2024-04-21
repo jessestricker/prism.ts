@@ -10,11 +10,6 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "release": {
-    "branches": [
-      "main"
-    ]
-  },
   "scripts": {
     "build": "tsc --build",
     "format": "prettier --write .",
