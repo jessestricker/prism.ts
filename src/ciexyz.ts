@@ -1,3 +1,4 @@
+import { Oklab } from "./oklab";
 import { SrgbLinear } from "./srgb";
 import { Matrix3, matMulVec } from "./util/linalg";
 import { Nominal } from "./util/nominal";
@@ -29,6 +30,10 @@ export class CieXyzD65 extends BaseCieXyz<typeof CieXyzD65.SYMBOL> {
 
   toSrgbLinear(): SrgbLinear {
     return SrgbLinear.fromCieXyzD65(this);
+  }
+
+  toOklab(): Oklab {
+    return Oklab.fromCieXyzD65(this);
   }
 }
 
