@@ -1,5 +1,5 @@
 import { SrgbLinear } from "./srgb";
-import { Matrix3, mulMatVec } from "./util/linalg";
+import { Matrix3, matMulVec } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
 abstract class BaseCieXyz<_Symbol extends symbol> extends Nominal<_Symbol> {
@@ -16,7 +16,7 @@ export class CieXyzD50 extends BaseCieXyz<typeof CieXyzD50.SYMBOL> {
   private declare static readonly SYMBOL: unique symbol;
 
   toCieXyzD65(): CieXyzD65 {
-    return new CieXyzD65(...mulMatVec(D50_TO_D65, [this.x, this.y, this.z]));
+    return new CieXyzD65(...matMulVec(D50_TO_D65, [this.x, this.y, this.z]));
   }
 }
 
@@ -24,7 +24,7 @@ export class CieXyzD65 extends BaseCieXyz<typeof CieXyzD65.SYMBOL> {
   private declare static readonly SYMBOL: unique symbol;
 
   toCieXyzD50(): CieXyzD50 {
-    return new CieXyzD50(...mulMatVec(D65_TO_D50, [this.x, this.y, this.z]));
+    return new CieXyzD50(...matMulVec(D65_TO_D50, [this.x, this.y, this.z]));
   }
 
   toSrgbLinear(): SrgbLinear {

@@ -10,6 +10,6 @@ export type Matrix3 = [
   [number, number, number],
 ];
 
-export function mulMatVec(mat: Matrix3, vec: Vector3): Vector3 {
+export function matMulVec(mat: Matrix3, vec: Vector3): Vector3 {
   return [vecDot(mat[0], vec), vecDot(mat[1], vec), vecDot(mat[2], vec)];
 }
