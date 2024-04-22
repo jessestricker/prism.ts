@@ -9,6 +9,6 @@
  * }
  * ```
  */
-export abstract class Nominal<const _Symbol extends symbol> {
+export abstract class Nominal<_Symbol extends symbol> {
   private declare readonly _symbol: _Symbol;
 }
