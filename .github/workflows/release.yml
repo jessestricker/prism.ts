@@ -1,9 +1,16 @@
 name: Release
+
 on:
-  workflow_call:
+  workflow_dispatch:
+
 jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+
   release:
     name: Release
+    needs: [build]
     permissions:
       contents: write # to create a GitHub release
       packages: write # to publish to the GitHub Package Registry

@@ -1,6 +1,9 @@
 name: Build
+
 on:
-  push:
+  pull_request:
+  workflow_call:
+
 jobs:
   build:
     name: Build
@@ -67,14 +70,3 @@ jobs:
 
       - name: Check lint
         run: pnpm lint
-
-  release:
-    name: Release
-    needs: [build, check-format, check-lint]
-    permissions:
-      contents: write # to create a GitHub release
-      packages: write # to publish to the GitHub Package Registry
-      issues: write # to comment on released issues
-      pull-requests: write # to comment on released pull requests
-    uses: ./.github/workflows/release.yml
-    if: github.ref_type == 'branch' && github.ref_name == 'main'
