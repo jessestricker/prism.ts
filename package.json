@@ -23,9 +23,9 @@
     "lint": "eslint .",
     "prepare": "pnpm run build"
   },
-  "packageManager": "pnpm@9.0.4",
   "engines": {
-    "node": "20"
+    "pnpm": "^9",
+    "node": "^20"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
