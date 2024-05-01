@@ -1,6 +1,7 @@
 {
   "name": "@jessestricker/prism",
   "version": "0.0.0",
+  "description": "Accurate and type-safe color conversions.",
   "author": "Jesse Stricker",
   "license": "Apache-2.0",
   "repository": {
