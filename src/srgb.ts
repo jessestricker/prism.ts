@@ -1,5 +1,5 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, matMulVec } from "./util/linalg";
+import { Matrix3 } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
 /**
@@ -43,13 +43,13 @@ export class SrgbLinear extends Nominal<typeof SrgbLinear.SYMBOL> {
 
   static fromCieXyzD65(xyz: CieXyzD65): SrgbLinear {
     return new SrgbLinear(
-      ...matMulVec(XYZ_TO_LINEAR_SRGB, [xyz.x, xyz.y, xyz.z]),
+      ...Matrix3.multiply(XYZ_TO_LINEAR_SRGB, [xyz.x, xyz.y, xyz.z]),
     );
   }
 
   toCieXyzD65(): CieXyzD65 {
     return new CieXyzD65(
-      ...matMulVec(LINEAR_SRGB_TO_XYZ, [this.r, this.g, this.b]),
+      ...Matrix3.multiply(LINEAR_SRGB_TO_XYZ, [this.r, this.g, this.b]),
     );
   }
 

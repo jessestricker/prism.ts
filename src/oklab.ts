@@ -1,5 +1,5 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, matMulVec, vecMap } from "./util/linalg";
+import { Matrix3, Vector3 } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
 export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
@@ -14,15 +14,15 @@ export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
   }
 
   static fromCieXyzD65(xyz: CieXyzD65): Oklab {
-    const lms = matMulVec(XYZ_TO_LMS, [xyz.x, xyz.y, xyz.z]);
-    const lmsNL = vecMap(lms, (c) => Math.cbrt(c));
-    return new Oklab(...matMulVec(LMS_TO_OKLAB, lmsNL));
+    const lms = Matrix3.multiply(XYZ_TO_LMS, [xyz.x, xyz.y, xyz.z]);
+    const lmsNL = Vector3.map(lms, (c) => Math.cbrt(c));
+    return new Oklab(...Matrix3.multiply(LMS_TO_OKLAB, lmsNL));
   }
 
   toCieXyzD65(): CieXyzD65 {
-    const lmsNL = matMulVec(OKLAB_TO_LMS, [this.l, this.a, this.b]);
-    const lms = vecMap(lmsNL, (c) => c ** 3);
-    return new CieXyzD65(...matMulVec(LMS_TO_XYZ, lms));
+    const lmsNL = Matrix3.multiply(OKLAB_TO_LMS, [this.l, this.a, this.b]);
+    const lms = Vector3.map(lmsNL, (c) => c ** 3);
+    return new CieXyzD65(...Matrix3.multiply(LMS_TO_XYZ, lms));
   }
 
   toOklch(): Oklch {
