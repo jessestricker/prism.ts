@@ -24,6 +24,30 @@ export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
     const lms = vecMap(lmsNL, (c) => c ** 3);
     return new CieXyzD65(...matMulVec(LMS_TO_XYZ, lms));
   }
+
+  toOklch(): Oklch {
+    const c = Math.hypot(this.a, this.b);
+    const h = Math.atan2(this.b, this.a);
+    return new Oklch(this.l, c, h);
+  }
+}
+
+export class Oklch extends Nominal<typeof Oklch.SYMBOL> {
+  private declare static readonly SYMBOL: unique symbol;
+
+  constructor(
+    readonly l: number,
+    readonly c: number,
+    readonly h: number,
+  ) {
+    super();
+  }
+
+  toOklab(): Oklab {
+    const a = this.c * Math.cos(this.h);
+    const b = this.c * Math.sin(this.h);
+    return new Oklab(this.l, a, b);
+  }
 }
 
 // prettier-ignore
