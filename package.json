@@ -2,31 +2,21 @@
   "name": "@jessestricker/prism",
   "version": "0.0.0",
   "description": "Accurate and type-safe color conversions.",
-  "author": "Jesse Stricker",
   "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jessestricker/prism.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
+  "author": "Jesse Stricker",
   "type": "module",
+  "files": [
+    "./lib"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "github:jessestricker/prism",
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "format": "prettier --write .",
     "lint": "eslint .",
     "prepare": "pnpm run build"
-  },
-  "engines": {
-    "pnpm": "9",
-    "node": "20"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
@@ -35,5 +25,12 @@
     "semantic-release": "^23.0.8",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.7.0"
+  },
+  "engines": {
+    "node": "20",
+    "pnpm": "9"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
