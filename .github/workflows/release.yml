@@ -34,7 +34,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --dev
+        run: pnpm install
 
       - name: Release
         run: pnpm semantic-release

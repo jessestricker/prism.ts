@@ -48,10 +48,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --dev
+        run: pnpm install
 
       - name: Check format
-        run: pnpm format --check
+        run: pnpm format:check
 
   check-lint:
     name: Check lint
@@ -72,7 +72,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --dev
+        run: pnpm install
 
       - name: Check lint
         run: pnpm lint

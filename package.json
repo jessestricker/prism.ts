@@ -13,9 +13,12 @@
   "repository": "github:jessestricker/prism",
   "scripts": {
     "build": "tsc --build",
+    "build:watch": "tsc --build --watch",
     "clean": "tsc --build --clean",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "prepare": "pnpm run build"
   },
   "devDependencies": {
