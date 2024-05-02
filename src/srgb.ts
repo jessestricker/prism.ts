@@ -1,11 +1,11 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, matMulVec } from "./util/linalg";
+import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
 /**
  * A value in the canonical (non-linear) sRGB color space.
  */
-export class Srgb extends Nominal<typeof Srgb.SYMBOL> {
+export class Srgb extends Nominal<typeof Srgb.SYMBOL> implements ToVector3 {
   private declare static readonly SYMBOL: unique symbol;
 
   constructor(
@@ -23,14 +23,21 @@ export class Srgb extends Nominal<typeof Srgb.SYMBOL> {
         : ((value + 0.055) / 1.055) ** 2.4;
     }
 
-    return new SrgbLinear(toLinear(this.r), toLinear(this.g), toLinear(this.b));
+    return new SrgbLinear(...Vector3.map(this.toVector3(), toLinear));
+  }
+
+  toVector3(): Vector3 {
+    return [this.r, this.g, this.b];
   }
 }
 
 /**
  * A value in the linear sRGB color space.
  */
-export class SrgbLinear extends Nominal<typeof SrgbLinear.SYMBOL> {
+export class SrgbLinear
+  extends Nominal<typeof SrgbLinear.SYMBOL>
+  implements ToVector3
+{
   private declare static readonly SYMBOL: unique symbol;
 
   constructor(
@@ -43,13 +50,13 @@ export class SrgbLinear extends Nominal<typeof SrgbLinear.SYMBOL> {
 
   static fromCieXyzD65(xyz: CieXyzD65): SrgbLinear {
     return new SrgbLinear(
-      ...matMulVec(XYZ_TO_LINEAR_SRGB, [xyz.x, xyz.y, xyz.z]),
+      ...Matrix3.multiply(XYZ_TO_LINEAR_SRGB, xyz.toVector3()),
     );
   }
 
   toCieXyzD65(): CieXyzD65 {
     return new CieXyzD65(
-      ...matMulVec(LINEAR_SRGB_TO_XYZ, [this.r, this.g, this.b]),
+      ...Matrix3.multiply(LINEAR_SRGB_TO_XYZ, this.toVector3()),
     );
   }
 
@@ -60,11 +67,11 @@ export class SrgbLinear extends Nominal<typeof SrgbLinear.SYMBOL> {
         : 1.055 * value ** (1.0 / 2.4) - 0.055;
     }
 
-    return new Srgb(
-      toNonLinear(this.r),
-      toNonLinear(this.g),
-      toNonLinear(this.b),
-    );
+    return new Srgb(...Vector3.map(this.toVector3(), toNonLinear));
+  }
+
+  toVector3(): Vector3 {
+    return [this.r, this.g, this.b];
   }
 }
 

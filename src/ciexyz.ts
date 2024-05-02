@@ -1,9 +1,12 @@
 import { Oklab } from "./oklab";
 import { SrgbLinear } from "./srgb";
-import { Matrix3, matMulVec } from "./util/linalg";
+import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
-abstract class BaseCieXyz<_Symbol extends symbol> extends Nominal<_Symbol> {
+abstract class BaseCieXyz<_Symbol extends symbol>
+  extends Nominal<_Symbol>
+  implements ToVector3
+{
   constructor(
     readonly x: number,
     readonly y: number,
@@ -11,13 +14,17 @@ abstract class BaseCieXyz<_Symbol extends symbol> extends Nominal<_Symbol> {
   ) {
     super();
   }
+
+  toVector3(): Vector3 {
+    return [this.x, this.y, this.z];
+  }
 }
 
 export class CieXyzD50 extends BaseCieXyz<typeof CieXyzD50.SYMBOL> {
   private declare static readonly SYMBOL: unique symbol;
 
   toCieXyzD65(): CieXyzD65 {
-    return new CieXyzD65(...matMulVec(D50_TO_D65, [this.x, this.y, this.z]));
+    return new CieXyzD65(...Matrix3.multiply(D50_TO_D65, this.toVector3()));
   }
 }
 
@@ -25,7 +32,7 @@ export class CieXyzD65 extends BaseCieXyz<typeof CieXyzD65.SYMBOL> {
   private declare static readonly SYMBOL: unique symbol;
 
   toCieXyzD50(): CieXyzD50 {
-    return new CieXyzD50(...matMulVec(D65_TO_D50, [this.x, this.y, this.z]));
+    return new CieXyzD50(...Matrix3.multiply(D65_TO_D50, this.toVector3()));
   }
 
   toSrgbLinear(): SrgbLinear {
