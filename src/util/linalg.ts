@@ -6,6 +6,10 @@ export const Vector3 = {
   },
 };
 
+export interface ToVector3 {
+  toVector3(): Vector3;
+}
+
 export type Matrix3 = [
   [number, number, number],
   [number, number, number],

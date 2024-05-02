@@ -1,8 +1,8 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, Vector3 } from "./util/linalg";
+import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
 import { Nominal } from "./util/nominal";
 
-export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
+export class Oklab extends Nominal<typeof Oklab.SYMBOL> implements ToVector3 {
   private declare static readonly SYMBOL: unique symbol;
 
   constructor(
@@ -14,13 +14,13 @@ export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
   }
 
   static fromCieXyzD65(xyz: CieXyzD65): Oklab {
-    const lms = Matrix3.multiply(XYZ_TO_LMS, [xyz.x, xyz.y, xyz.z]);
+    const lms = Matrix3.multiply(XYZ_TO_LMS, xyz.toVector3());
     const lmsNL = Vector3.map(lms, (c) => Math.cbrt(c));
     return new Oklab(...Matrix3.multiply(LMS_TO_OKLAB, lmsNL));
   }
 
   toCieXyzD65(): CieXyzD65 {
-    const lmsNL = Matrix3.multiply(OKLAB_TO_LMS, [this.l, this.a, this.b]);
+    const lmsNL = Matrix3.multiply(OKLAB_TO_LMS, this.toVector3());
     const lms = Vector3.map(lmsNL, (c) => c ** 3);
     return new CieXyzD65(...Matrix3.multiply(LMS_TO_XYZ, lms));
   }
@@ -30,9 +30,13 @@ export class Oklab extends Nominal<typeof Oklab.SYMBOL> {
     const h = Math.atan2(this.b, this.a);
     return new Oklch(this.l, c, h);
   }
+
+  toVector3(): Vector3 {
+    return [this.l, this.a, this.b];
+  }
 }
 
-export class Oklch extends Nominal<typeof Oklch.SYMBOL> {
+export class Oklch extends Nominal<typeof Oklch.SYMBOL> implements ToVector3 {
   private declare static readonly SYMBOL: unique symbol;
 
   constructor(
@@ -47,6 +51,10 @@ export class Oklch extends Nominal<typeof Oklch.SYMBOL> {
     const a = this.c * Math.cos(this.h);
     const b = this.c * Math.sin(this.h);
     return new Oklab(this.l, a, b);
+  }
+
+  toVector3(): Vector3 {
+    return [this.l, this.c, this.h];
   }
 }
 
