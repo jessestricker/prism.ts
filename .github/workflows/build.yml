@@ -29,6 +29,15 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Generate API report
+        run: pnpm api
+
+      - name: Commit API report
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: "chore(api): update API report"
+          file_pattern: "./etc/*.api.md"
+
   check-format:
     name: Check format
     runs-on: ubuntu-22.04
