@@ -5,6 +5,6 @@
   "newlineKind": "lf",
 
   "apiReport": { "enabled": true },
-  "docModel": { "enabled": true },
+  "docModel": { "enabled": false },
   "dtsRollup": { "enabled": false }
 }
