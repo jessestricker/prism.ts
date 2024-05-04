@@ -19,7 +19,7 @@
     "build:watch": "tsc --build --watch",
     "clean": "tsc --build --clean",
     "preapi": "pnpm run build",
-    "api": "api-extractor run",
+    "api": "api-extractor run --verbose",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
