@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+
+  "mainEntryPointFilePath": "<projectFolder>/lib/index.d.ts",
+  "newlineKind": "lf",
+
+  "apiReport": { "enabled": true },
+  "docModel": { "enabled": true },
+  "dtsRollup": { "enabled": false }
+}

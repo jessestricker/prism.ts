@@ -1,17 +1,21 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
-import { Nominal } from "./util/nominal";
+import { Matrix3, Vector3 } from "./util/linalg";
 
-export class Oklab extends Nominal<typeof Oklab.SYMBOL> implements ToVector3 {
-  private declare static readonly SYMBOL: unique symbol;
+/**
+ * A value in the Oklab color space.
+ * @public
+ */
+export class Oklab {
+  private declare readonly nominalTypeId: symbol;
 
   constructor(
+    /** The lightness component _L_, in the range [0, 1]. */
     readonly l: number,
+    /** The green/red component _a_, practically in the range [-0.5, +0.5]. */
     readonly a: number,
+    /** The blue/yellow component _b_, practically in the range [-0.5, +0.5]. */
     readonly b: number,
-  ) {
-    super();
-  }
+  ) {}
 
   static fromCieXyzD65(xyz: CieXyzD65): Oklab {
     const lms = Matrix3.multiply(XYZ_TO_LMS, xyz.toVector3());
@@ -31,30 +35,32 @@ export class Oklab extends Nominal<typeof Oklab.SYMBOL> implements ToVector3 {
     return new Oklch(this.l, c, h);
   }
 
+  /** @internal */
   toVector3(): Vector3 {
     return [this.l, this.a, this.b];
   }
 }
 
-export class Oklch extends Nominal<typeof Oklch.SYMBOL> implements ToVector3 {
-  private declare static readonly SYMBOL: unique symbol;
+/**
+ * A value in the polar Oklab color space (a.k.a. OkLCh).
+ * @public
+ */
+export class Oklch {
+  private declare readonly nominalTypeId: symbol;
 
   constructor(
+    /** The lightness component _L_, in the range [0, 1]. */
     readonly l: number,
+    /** The chroma component _C_, practically in the range [0, 0.5]. */
     readonly c: number,
+    /** The hue component _h°_, in the range [0, τ). */
     readonly h: number,
-  ) {
-    super();
-  }
+  ) {}
 
   toOklab(): Oklab {
     const a = this.c * Math.cos(this.h);
     const b = this.c * Math.sin(this.h);
     return new Oklab(this.l, a, b);
-  }
-
-  toVector3(): Vector3 {
-    return [this.l, this.c, this.h];
   }
 }
 

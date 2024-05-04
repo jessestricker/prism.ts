@@ -1,14 +1,12 @@
+/** @internal */
 export type Vector3 = [number, number, number];
 
+/** @internal */
 export const Vector3 = {
   map(vector: Vector3, map: (element: number) => number): Vector3 {
     return [map(vector[0]), map(vector[1]), map(vector[2])];
   },
 };
-
-export interface ToVector3 {
-  toVector3(): Vector3;
-}
 
 export type Matrix3 = [
   [number, number, number],

@@ -1,35 +1,50 @@
 import { Oklab } from "./oklab";
 import { SrgbLinear } from "./srgb";
-import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
-import { Nominal } from "./util/nominal";
+import { Matrix3, Vector3 } from "./util/linalg";
 
-abstract class BaseCieXyz<_Symbol extends symbol>
-  extends Nominal<_Symbol>
-  implements ToVector3
-{
+/**
+ * A value in the CIE 1931 standard colorimetric system,
+ * normalized to the CIE standard illuminant D50.
+ * @public
+ */
+export class CieXyzD50 {
+  private declare readonly nominalTypeId: symbol;
+
   constructor(
+    /** The component _X_. */
     readonly x: number,
+    /** The luminance component _Y_. */
     readonly y: number,
+    /** The component _Z_. */
     readonly z: number,
-  ) {
-    super();
+  ) {}
+
+  toCieXyzD65(): CieXyzD65 {
+    return new CieXyzD65(...Matrix3.multiply(D50_TO_D65, this.toVector3()));
   }
 
+  /** @internal */
   toVector3(): Vector3 {
     return [this.x, this.y, this.z];
   }
 }
 
-export class CieXyzD50 extends BaseCieXyz<typeof CieXyzD50.SYMBOL> {
-  private declare static readonly SYMBOL: unique symbol;
+/**
+ * A value in the CIE 1931 standard colorimetric system,
+ * normalized to the CIE standard illuminant D65.
+ * @public
+ */
+export class CieXyzD65 {
+  private declare readonly nominalTypeId: symbol;
 
-  toCieXyzD65(): CieXyzD65 {
-    return new CieXyzD65(...Matrix3.multiply(D50_TO_D65, this.toVector3()));
-  }
-}
-
-export class CieXyzD65 extends BaseCieXyz<typeof CieXyzD65.SYMBOL> {
-  private declare static readonly SYMBOL: unique symbol;
+  constructor(
+    /** The component _X_. */
+    readonly x: number,
+    /** The luminance component _Y_. */
+    readonly y: number,
+    /** The component _Z_. */
+    readonly z: number,
+  ) {}
 
   toCieXyzD50(): CieXyzD50 {
     return new CieXyzD50(...Matrix3.multiply(D65_TO_D50, this.toVector3()));
@@ -41,6 +56,11 @@ export class CieXyzD65 extends BaseCieXyz<typeof CieXyzD65.SYMBOL> {
 
   toOklab(): Oklab {
     return Oklab.fromCieXyzD65(this);
+  }
+
+  /** @internal */
+  toVector3(): Vector3 {
+    return [this.x, this.y, this.z];
   }
 }
 

@@ -1,20 +1,21 @@
 import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, ToVector3, Vector3 } from "./util/linalg";
-import { Nominal } from "./util/nominal";
+import { Matrix3, Vector3 } from "./util/linalg";
 
 /**
  * A value in the canonical (non-linear) sRGB color space.
+ * @public
  */
-export class Srgb extends Nominal<typeof Srgb.SYMBOL> implements ToVector3 {
-  private declare static readonly SYMBOL: unique symbol;
+export class Srgb {
+  private declare readonly nominalTypeId: symbol;
 
   constructor(
+    /** The red component _R′_, in the range [0, 1]. */
     readonly r: number,
+    /** The green component _G′_, in the range [0, 1]. */
     readonly g: number,
+    /** The blue component _B′_, in the range [0, 1]. */
     readonly b: number,
-  ) {
-    super();
-  }
+  ) {}
 
   toSrgbLinear(): SrgbLinear {
     function toLinear(value: number): number {
@@ -26,6 +27,7 @@ export class Srgb extends Nominal<typeof Srgb.SYMBOL> implements ToVector3 {
     return new SrgbLinear(...Vector3.map(this.toVector3(), toLinear));
   }
 
+  /** @internal */
   toVector3(): Vector3 {
     return [this.r, this.g, this.b];
   }
@@ -33,20 +35,19 @@ export class Srgb extends Nominal<typeof Srgb.SYMBOL> implements ToVector3 {
 
 /**
  * A value in the linear sRGB color space.
+ * @public
  */
-export class SrgbLinear
-  extends Nominal<typeof SrgbLinear.SYMBOL>
-  implements ToVector3
-{
-  private declare static readonly SYMBOL: unique symbol;
+export class SrgbLinear {
+  private declare readonly nominalTypeId: symbol;
 
   constructor(
+    /** The red component _R_, in the range [0, 1]. */
     readonly r: number,
+    /** The green component _G_, in the range [0, 1]. */
     readonly g: number,
+    /** The blue component _B_, in the range [0, 1]. */
     readonly b: number,
-  ) {
-    super();
-  }
+  ) {}
 
   static fromCieXyzD65(xyz: CieXyzD65): SrgbLinear {
     return new SrgbLinear(
@@ -70,6 +71,7 @@ export class SrgbLinear
     return new Srgb(...Vector3.map(this.toVector3(), toNonLinear));
   }
 
+  /** @internal */
   toVector3(): Vector3 {
     return [this.r, this.g, this.b];
   }
