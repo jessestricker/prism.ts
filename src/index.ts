@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-export { CieXyzD50, CieXyzD65 } from "./ciexyz";
-export { Oklab, Oklch } from "./oklab";
-export { Srgb, SrgbLinear } from "./srgb";
-export { Vector3 as _Vector3 } from "./util/linalg";
+export { CieXyzD50, CieXyzD65 } from "./ciexyz.js";
+export { Oklab, Oklch } from "./oklab.js";
+export { Srgb, SrgbLinear } from "./srgb.js";
+export { Vector3 as _Vector3 } from "./util/linalg.js";

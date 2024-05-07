@@ -1,5 +1,5 @@
-import { CieXyzD65 } from "./ciexyz";
-import { Matrix3, Vector3 } from "./util/linalg";
+import { CieXyzD65 } from "./ciexyz.js";
+import { Matrix3, Vector3 } from "./util/linalg.js";
 
 /**
  * A value in the canonical (non-linear) sRGB color space.

@@ -14,9 +14,6 @@ importers:
       '@microsoft/api-extractor':
         specifier: ^7.43.1
         version: 7.43.1
-      '@tsconfig/recommended':
-        specifier: ^1.0.6
-        version: 1.0.6
       '@tsconfig/strictest':
         specifier: ^2.0.5
         version: 2.0.5
@@ -229,9 +226,6 @@ packages:
   '@sindresorhus/merge-streams@2.3.0':
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
-
-  '@tsconfig/recommended@1.0.6':
-    resolution: {integrity: sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==}
 
   '@tsconfig/strictest@2.0.5':
     resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
@@ -2161,8 +2155,6 @@ snapshots:
   '@sindresorhus/is@4.6.0': {}
 
   '@sindresorhus/merge-streams@2.3.0': {}
-
-  '@tsconfig/recommended@1.0.6': {}
 
   '@tsconfig/strictest@2.0.5': {}
 

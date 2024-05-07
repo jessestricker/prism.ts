@@ -1,6 +1,6 @@
-import { Oklab } from "./oklab";
-import { SrgbLinear } from "./srgb";
-import { Matrix3, Vector3 } from "./util/linalg";
+import { Oklab } from "./oklab.js";
+import { SrgbLinear } from "./srgb.js";
+import { Matrix3, Vector3 } from "./util/linalg.js";
 
 /**
  * A value in the CIE 1931 standard colorimetric system,
