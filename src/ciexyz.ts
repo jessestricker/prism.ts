@@ -1,6 +1,14 @@
+import { CieLab } from "./cielab.js";
 import { Oklab } from "./oklab.js";
 import { SrgbLinear } from "./srgb.js";
 import { Matrix3, Vector3 } from "./util/linalg.js";
+
+/** @internal */
+export const D50: Vector3 = [
+  0.3457 / 0.3585,
+  1.0,
+  (1.0 - 0.3457 - 0.3585) / 0.3585,
+];
 
 /**
  * A value in the CIE 1931 standard colorimetric system,
@@ -21,6 +29,10 @@ export class CieXyzD50 {
 
   toCieXyzD65(): CieXyzD65 {
     return new CieXyzD65(...Matrix3.multiply(D50_TO_D65, this.toVector3()));
+  }
+
+  toCieLab(): CieLab {
+    return CieLab.fromCieXyzD50(this);
   }
 
   /** @internal */
