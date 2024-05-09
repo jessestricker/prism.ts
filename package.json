@@ -19,8 +19,8 @@
     "api": "api-extractor run --verbose",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "eslint ./src/",
+    "lint:fix": "eslint --fix ./src/",
     "prepare": "pnpm run build",
     "pretest": "pnpm run build",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
@@ -38,7 +38,7 @@
     "typescript-eslint": "^7.8.0"
   },
   "engines": {
-    "node": "20",
+    "node": ">=20.11.0",
     "pnpm": "9"
   },
   "publishConfig": {
