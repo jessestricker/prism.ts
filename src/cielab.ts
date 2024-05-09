@@ -8,11 +8,11 @@ export class CieLab {
   private declare readonly nominalTypeId: symbol;
 
   constructor(
-    /** The lightness component _L_, in the range [0, 1]. */
+    /** The lightness component _L*_, in the range [0, 1]. */
     readonly l: number,
-    /** The green/red component _a_, practically in the range [-1.6, +1.6]. */
+    /** The green/red component _a*_, practically in the range [-1.6, +1.6]. */
     readonly a: number,
-    /** The blue/yellow component _b_, practically in the range [-1.6, +1.6]. */
+    /** The blue/yellow component _b*_, practically in the range [-1.6, +1.6]. */
     readonly b: number,
   ) {}
 
@@ -41,6 +41,35 @@ export class CieLab {
     const y = fInv(fYYn) * Yn;
     const z = fInv(fZZn) * Zn;
     return new CieXyzD50(x, y, z);
+  }
+
+  toCieLabPolar(): CieLabPolar {
+    const c = Math.hypot(this.a, this.b);
+    const h = Math.atan2(this.b, this.a);
+    return new CieLabPolar(this.l, c, h);
+  }
+}
+
+/**
+ * A value in the polar variant of the CIE 1976 L\*a\*b\* color space.
+ * @public
+ */
+export class CieLabPolar {
+  private declare readonly nominalTypeId: symbol;
+
+  constructor(
+    /** The lightness component _L*_, in the range [0, 1]. */
+    readonly l: number,
+    /** The chroma component _C*_, practically in the range [0, 2.3]. */
+    readonly c: number,
+    /** The hue component _h_, in the range [0, τ). */
+    readonly h: number,
+  ) {}
+
+  toCieLab(): CieLab {
+    const a = this.c * Math.cos(this.h);
+    const b = this.c * Math.sin(this.h);
+    return new CieLab(this.l, a, b);
   }
 }
 
