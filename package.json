@@ -13,17 +13,17 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "build:watch": "tsc --build --watch",
-    "clean": "tsc --build --clean",
     "preapi": "pnpm run build",
-    "api": "api-extractor run --verbose",
+    "api": "api-extractor run --verbose --local",
+    "preapi:check": "pnpm run build",
+    "api:check": "api-extractor run --verbose",
+    "pretest": "pnpm run build",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint ./src/",
-    "lint:fix": "eslint --fix ./src/",
-    "prepare": "pnpm run build",
-    "pretest": "pnpm run build",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
+    "lint": "eslint --fix ./src/",
+    "lint:check": "eslint ./src/",
+    "prepare": "pnpm run build"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",

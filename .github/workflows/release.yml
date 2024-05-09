@@ -5,13 +5,13 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    name: Build
-    uses: ./.github/workflows/build.yml
+  run-checks:
+    name: Run checks
+    uses: ./.github/workflows/checks.yml
 
   release:
     name: Release
-    needs: [build]
+    needs: [run-checks]
     permissions:
       contents: write # to create a GitHub release
       packages: write # to publish to the GitHub Package Registry
