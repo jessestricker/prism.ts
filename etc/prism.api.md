@@ -5,11 +5,43 @@
 ```ts
 
 // @public
+export class CieLab {
+    constructor(
+    l: number,
+    a: number,
+    b: number);
+    readonly a: number;
+    readonly b: number;
+    // (undocumented)
+    static fromCieXyzD50(xyz: CieXyzD50): CieLab;
+    readonly l: number;
+    // (undocumented)
+    toCieLabPolar(): CieLabPolar;
+    // (undocumented)
+    toCieXyzD50(): CieXyzD50;
+}
+
+// @public
+export class CieLabPolar {
+    constructor(
+    l: number,
+    c: number,
+    h: number);
+    readonly c: number;
+    readonly h: number;
+    readonly l: number;
+    // (undocumented)
+    toCieLab(): CieLab;
+}
+
+// @public
 export class CieXyzD50 {
     constructor(
     x: number,
     y: number,
     z: number);
+    // (undocumented)
+    toCieLab(): CieLab;
     // (undocumented)
     toCieXyzD65(): CieXyzD65;
     // @internal (undocumented)
