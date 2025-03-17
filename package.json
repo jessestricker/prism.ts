@@ -9,7 +9,7 @@
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jessestricker/prism.git"
+    "url": "git+https://github.com/jessestricker/prism.ts.git"
   },
   "scripts": {
     "build": "tsc --build",
